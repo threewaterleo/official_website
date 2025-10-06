@@ -1,0 +1,194 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+html {
+  font-size: 10px;
+}
+
+
+@media screen and (min-width: 550px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media screen and (min-width: 824px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1224px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: color 0.5s,
+  background-color 0.5s;
+  background: rgba(12, 12, 26, 1);
+  line-height: 1.2;
+  font-family:
+          Inter,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          Cantarell,
+          'Fira Sans',
+          'Droid Sans',
+          'Helvetica Neue',
+          sans-serif;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --van-tab-active-text-color: #fe2442;
+  --van-padding-base: 10px;
+  position: relative;
+}
+
+#app {
+  max-width: 100%;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  height: 100%;}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+span {
+  user-select: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+div {
+  user-select: none;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+a {
+  font-weight: 500;
+  color: #333;
+  text-decoration: inherit;
+}
+
+button {
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.omit-text {
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 单行省略
+.text_ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+//两行省略
+.text_ellipsis2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+}
+
+//三行省略
+.text_ellipsis3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-break: break-all;
+}
+
+// 消失过度效果
+.opacity0 {
+  opacity: 0 !important;
+}
+
+.fade {
+  opacity: 0;
+  /* 初始透明度为0 */
+  animation: fadeIn 0.7s forwards;
+  /* 使用fadeIn动画 */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    /* 最终透明度为1 */
+  }
+}
+
+// 禁用滚动条
+.disable_scrollbar {
+  overflow: -moz-scrollbars-none;
+  /* 适用于 Firefox */
+  -ms-overflow-style: none;
+  /* 适用于 Internet Explorer 和 Edge */
+  scrollbar-width: none;
+  /* 适用于 Firefox */
+  // 针对 iOS 的样式
+  @supports (-webkit-touch-callout: none) {
+    padding-bottom: 90px !important;
+  }
+}
+
+.disable_scrollbar::-webkit-scrollbar {
+  display: none;
+  /* 适用于 Webkit 浏览器 */
+}
+
