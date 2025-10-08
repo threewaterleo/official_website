@@ -2,7 +2,7 @@
   .header {
     width: 100%;
     fill: #000;
-    box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.2) inset;
+    box-shadow: 0 -.1rem 0 0 rgba(255, 255, 255, 0.2) inset;
 
     .header_content {
       width: 63.9rem;
@@ -46,35 +46,124 @@
       }
 
       .middle {
-        gap: 2rem;
+        height: 100%;
 
-        div {
-          font-size: .8rem;
-          font-weight: 600;
-          color: #FFFFFF;
-          opacity: 0.5;
+        .nav-item {
+          height: 100%;
+          width: fit-content;
+          max-width: 7rem;
+          padding: 0 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          p {
+            font-size: .8rem;
+            font-weight: 600;
+            line-height: 1.1rem;
+            text-align: center;
+            color: #FFFFFF;
+            opacity: 0.5;
+          }
+        }
+
+        .nav-item.selected {
+          position: relative;
+
+          p {
+            font-size: 1rem;
+            opacity: 1;
+          }
+
+          .slider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 4.8rem;
+            width: 5.6rem;
+            background: radial-gradient(50% 50% at 50% 100%, rgba(132, 47, 250, 0.8) 0%, rgba(132, 47, 250, 0) 100%);
+            transition: transform 0.2s cubic-bezier(0.65, 0, 0.35, 1);
+
+            .slider_bottom {
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              display: block;
+              height: .15rem;
+              width: 50%;
+              background: rgb(158, 40, 255);
+
+
+            }
+          }
         }
       }
 
       .right {
-        gap: .4rem;
+        height: 100%;
+        position: relative;
 
-        img:first-child {
-          width: 1rem;
-          height: 1rem;
+        .lang_index {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          gap: .4rem;
+
+          .lang_icon {
+            width: 1rem;
+            height: 1rem;
+          }
+
+          .lang_arrow {
+            width: .6rem;
+            height: auto;
+            transition: transform 0.6s ease;
+            transform-origin: center center;
+            backface-visibility: hidden;
+            transform: rotate(-180deg);
+          }
+          .lang_arrow.selected {
+            transform: rotate(0deg);
+            transition: transform 0.6s ease;
+          }
+
+          p {
+            color: #FFF;
+            font-size: .8rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+          }
         }
 
-        img:last-child {
-          width: .6rem;
-          height: auto;
-        }
+        .lang_box {
+          position: absolute;
+          top: 3.9rem;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 5.6rem;
+          border-radius: .4rem;
+          background: #1C1D55;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
 
-        p {
-          color: #FFF;
-          font-size: .8rem;
-          font-style: normal;
-          font-weight: 600;
-          line-height: normal;
+          .lang_item {
+            width: 100%;
+            height: 2rem;
+            font-size: .8rem;
+            font-weight: 600;
+            text-align: center;
+            line-height: 2rem;
+            color: rgba(255, 255, 255, 1);
+          }
+
+          .lang_item.selected {
+            background: rgba(3, 195, 223, 1);
+          }
         }
       }
     }
@@ -90,7 +179,9 @@
     .contact_btn {
       display: flex;
       align-items: center;
-      width: 10rem;
+      width: fit-content;
+      min-width: 10rem;
+      padding: 0 2rem;
       height: 2.4rem;
       justify-content: center;
       gap: .6rem;
@@ -114,7 +205,7 @@
       width: 100%;
       padding: 3.3rem 0 6rem;
       background: url(../images/game_website_bg.jpg) no-repeat;
-      background-size: 100% auto;
+      background-size: 100% 100%;
     }
 
     .main_top {
@@ -207,6 +298,7 @@
     .des {
       div:nth-child(2) {
         margin-bottom: .8rem;
+
         img {
           width: 38.1rem;
           height: auto;
@@ -287,6 +379,371 @@
         width: 100%;
         overflow: visible;
         margin-bottom: 2.2rem;
+
+        .carousel-container {
+          position: relative;
+          width: 100%;
+          height: 24.1rem;
+          margin: auto;
+          overflow: hidden;
+          perspective: 1000px;
+        }
+
+        .carousel-track {
+          position: relative;
+          width: 100%;
+          height: 21.7rem;
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          align-items: center;
+          transform-style: preserve-3d;
+          z-index: 1;
+        }
+
+        .carousel-track.skeleton {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+        }
+
+        .carousel-slide {
+          position: absolute;
+          overflow: hidden;
+          width: 10rem;
+          height: 21.7rem;
+          border-radius: 1rem;
+          transition: transform 0.6s ease, z-index 0.6s ease;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .slide_img {
+            width: 10rem;
+            height: 21.7rem;
+            z-index: 0;
+          }
+        }
+
+        .position-2 {
+          border: .1rem solid rgba(5, 195, 222, 1);
+        }
+
+        /* Carousel Dots */
+        .carousel-dots {
+          display: flex;
+          justify-content: center;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+        }
+
+        .dot {
+          width: .4rem;
+          height: .4rem;
+          background: rgba(255, 255, 255, .2);
+          border-radius: 50%;
+          margin: 0 .25rem;
+          transition: background 1s;
+        }
+
+        .dot.active {
+          background: rgba(255, 255, 255, 1);
+        }
+
+        .controls {
+          position: absolute;
+          top: 50%;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          transform: translateY(-50%);
+        }
+
+        .controls button {
+          background: rgba(255,255,255,0.8);
+          border: none;
+          font-size: 2rem;
+          padding: 0.2rem 0.5rem;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .pro {
+      .pro-content {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .pro_left {
+          width: 25.6rem;
+          height: auto;
+        }
+
+        .pro_right {
+          display: flex;
+          gap: 1rem;
+          position: relative;
+
+          .pro_right_div {
+            display: grid;
+            grid-template-columns: repeat(3, 6rem);
+            grid-template-rows: repeat(2, 7.9rem);
+            column-gap: 3.3rem;
+            row-gap: 2.9rem;
+            position: relative;
+
+            /* 所有元素样式 */
+
+            .pro_right_item {
+              position: relative;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              align-items: center;
+              font-weight: 400;
+              font-size: .8rem;
+              color: #FFF;
+
+              .item_img {
+                width: 6rem;
+                height: 6rem;
+              }
+            }
+
+            /* 第4个元素是第二行第3列（从右往左） */
+
+            .pro_right_item:nth-child(4) {
+              grid-column: 3;
+              grid-row: 2;
+            }
+
+            /* 第5个元素是第二行第2列 */
+
+            .pro_right_item:nth-child(5) {
+              grid-column: 2;
+              grid-row: 2;
+            }
+
+            /* 第6个元素是第二行第1列 */
+
+            .pro_right_item:nth-child(6) {
+              grid-column: 1;
+              grid-row: 2;
+            }
+
+            .arrow {
+              position: absolute;
+              top: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              display: grid;
+              grid-template-columns: repeat(2, 1.3rem);
+              grid-template-rows: repeat(2, 6rem);
+              column-gap: 8rem;
+              row-gap: 4.8rem;
+              align-items: center;
+
+              .arrow_img {
+                position: relative;
+                width: 100%;
+                height: auto;
+              }
+
+              .arrow_img:nth-child(3),
+              .arrow_img:nth-child(4) {
+                transform: rotate(-180deg);
+              }
+            }
+          }
+
+          .turn_img {
+            width: 3.1rem;
+            height: 16.6rem;
+          }
+        }
+      }
+
+    }
+
+    .pla {
+
+      .pla_img {
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+
+    .que {
+      .que_content {
+        display: flex;
+        justify-content: space-between;
+
+        .que_img {
+          width: 22.5rem;
+          height: 22.5rem;
+        }
+
+        .que_box {
+          display: flex;
+          flex-direction: column;
+          gap: 1.1rem;
+
+          .que_item {
+            width: 37.5rem;
+            border-radius: .6rem;
+            border: .1rem solid #262D5C;
+            padding: 0 1.5rem;
+
+            .que_item_title {
+              height: 3.3rem;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: .75rem 0;
+
+              div {
+                color: #FFF;
+                font-size: 1rem;
+                font-weight: 600;
+              }
+
+              img {
+                width: 1.8rem;
+                height: 1.8rem;
+              }
+            }
+
+            .que_item_content {
+              //max-height: 0;  // 初始 max-height 为 0
+              overflow: hidden;  // 防止内容溢出
+              border-top: .1rem solid rgba(38, 45, 92, 1);
+              color: #FFF;
+              padding: .75rem 0;  // 保留 padding，但展开时生效
+              font-size: .8rem;
+              font-weight: 400;
+              line-height: 1.2rem;
+              white-space: pre-line;
+              transition: max-height 0.2s ease-in-out;
+            }
+          }
+        }
+
+        // 添加 slide-down 过渡 CSS 类（Vue 会自动添加这些类）
+        .slide-down-enter-active,
+        .slide-down-leave-active {
+          transition: max-height 0.2s ease-in-out, opacity 0.1s ease;  // 同时过渡 max-height 和 opacity（可选淡入）
+          overflow: hidden;  // 确保动画期间隐藏溢出
+        }
+
+        .slide-down-enter-from,
+        .slide-down-leave-to {
+          max-height: 0;  // 进入时从 0 开始，离开时到 0 结束
+          opacity: 0;  // 可选：淡入/淡出效果
+        }
+
+        .slide-down-enter-to,
+        .slide-down-leave-from {
+          max-height: 40rem;  // 展开目标：稍大于内容最大高度（根据实际内容调整，如 300px ~ 800px）
+          opacity: 1;
+        }
+
+      }
+    }
+
+    .footer {
+      .footer_middle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .middle_left {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+
+          img {
+            width: 2.5rem;
+            height: 2.5rem;
+          }
+
+          div {
+            p {
+              height: 1.1rem;
+              color: #FFF;
+              font-style: normal;
+              line-height: 1.1rem;
+            }
+
+            p:first-child {
+              font-size: 1.2rem;
+              font-weight: 600;
+            }
+
+            p:last-child {
+              font-size: 0.8rem;
+              font-weight: 400;
+            }
+          }
+        }
+
+        .contact_btn {
+          width: fit-content;
+          min-width: 7.5rem;
+          padding: 0 2rem;
+        }
+      }
+
+      .bar {
+        display: block;
+        width: 100%;
+        height: .1rem;
+        margin: 1.2rem auto;
+        background: #262D5C;
+      }
+
+      .footer_bottom {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        p {
+          color: #FFF;
+          font-size: .6rem;
+          font-weight: 400;
+        }
+
+        .bottom_media {
+          padding-bottom: 2rem;
+          display: flex;
+          align-items: center;
+          gap: .8rem;
+
+          .media_item {
+            display: flex;
+            width: 2.4rem;
+            height: 2.4rem;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.30) 2.99%, rgba(255, 255, 255, 0.05) 96.9%);
+            opacity: .5;
+
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
+        }
       }
     }
   }

@@ -7,7 +7,9 @@
 
     <div class="grid">
       <div v-for="(item, index) in icon" :key="index">
-        <img alt="" :src="item.src" />
+        <div class="grid_icon">
+          <img alt="" :src="item.src" />
+        </div>
         <p :style="{color : item.color}">架构{{ index + 1 }}</p>
         <p>-</p>
         <p>{{ item.des }}</p>

@@ -41,10 +41,5 @@ const slideData = [
   { id: 3, src: prop.imageObj.home_page3 },
   { id: 4, src: prop.imageObj.home_page4 },
   { id: 5, src: prop.imageObj.home_page5 },
-  { id: 6, src: prop.imageObj.home_page1 },
-  { id: 7, src: prop.imageObj.home_page2 },
-  { id: 8, src: prop.imageObj.home_page3 },
-  { id: 9, src: prop.imageObj.home_page4 },
-  { id: 10, src: prop.imageObj.home_page5 },
 ]
 </script>

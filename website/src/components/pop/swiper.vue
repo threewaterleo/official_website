@@ -63,7 +63,6 @@ const visibleSlides = computed(() => {
     const index = (currentIndex.value + i + total) % total
     slides.push(props.slides[index])
   }
-  console.log('slides', slides)
 
   return slides
 })
@@ -168,98 +167,3 @@ function handleEnd() {
 
 </script>
 
-<style scoped>
-.carousel-container {
-  position: relative;
-  width: 100%;
-  height: 24.1rem;
-  margin: auto;
-  overflow: hidden;
-  perspective: 1000px;
-}
-
-.carousel-track {
-  position: relative;
-  width: 100%;
-  height: 21.7rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  transform-style: preserve-3d;
-  z-index: 1;
-}
-
-.carousel-track.skeleton {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-}
-
-.carousel-slide {
-  position: absolute;
-  overflow: hidden;
-  width: 10rem;
-  height: 21.7rem;
-  border-radius: 1rem;
-  /*
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  */
-  transition: transform 0.6s ease, z-index 0.6s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .slide_img {
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-  }
-}
-
-.position-2 {
-  border: .1rem solid rgba(5, 195, 222, 1);
-}
-
-/* Carousel Dots */
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
-.dot {
-  width: .4rem;
-  height: .4rem;
-  background: rgba(255, 255, 255, .2);
-  border-radius: 50%;
-  margin: 0 5px;
-  transition: background 1s;
-}
-
-.dot.active {
-  background: rgba(255, 255, 255, 1);
-}
-
-/* Manual Controls (Optional) */
-.controls {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-}
-
-.controls button {
-  background: rgba(255,255,255,0.8);
-  border: none;
-  font-size: 2rem;
-  padding: 0.2em 0.5em;
-  cursor: pointer;
-}
-</style>

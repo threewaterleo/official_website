@@ -4,7 +4,7 @@ import { createI18n } from 'vue-i18n';
 import './assets/css/main.less'
 import App from './App.vue'
 import {lang} from './i18n/lang.js'
-import { IndexBar, IndexAnchor } from 'vant';
+import { Collapse, CollapseItem } from 'vant';
 
 const messages = {
     en: lang.en,
@@ -20,6 +20,6 @@ const i18n =createI18n({
 
 const app = createApp(App)
 const pinia = createPinia()
-app.use(pinia).use(i18n).use(IndexBar).use(IndexAnchor)
+app.use(pinia).use(i18n).use(Collapse).use(CollapseItem)
 
 app.mount('#app')
