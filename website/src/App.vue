@@ -233,7 +233,7 @@ const navList = [
 ]
 
 const langList = [
-  { abbreviation: 'in', name: 'Indonesian' },
+  { abbreviation: 'id', name: 'Indonesian' },
   { abbreviation: 'en', name: 'English' },
   { abbreviation: 'zh', name: 'Chinese' },
 ]
