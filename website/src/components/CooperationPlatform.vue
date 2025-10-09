@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="title">
-    <div>合作平台</div>
+    <div>{{ title }}</div>
     <img alt="" :src="imageObj.title_icon">
   </div>
 
@@ -20,6 +20,10 @@ const prop = defineProps({
   },
   isPc: {
     type: Boolean,
+    required: true,
+  },
+  title: {
+    type: String,
     required: true,
   }
 })

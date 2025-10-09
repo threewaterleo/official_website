@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">
-      <div>常见问题</div>
+      <div>{{ title }}</div>
       <img alt="" :src="imageObj.title_icon">
     </div>
 
@@ -29,26 +29,27 @@
 
 <script setup>
 import {ref, nextTick} from "vue";
+import {useI18n} from "vue-i18n";
+const {t, locale} = useI18n();
 
 const prop = defineProps({
   imageObj: {
     type: Object,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  }
 })
 
 const activeNames = ref(0)
 
 const questions = [
-  {
-    title: '我需要什么样的网速来运行系统？',
-    content: '运行系统的基本要求是只需连接互联网即可。我们的下载系统会根据您的网络连接情况，决定在开始游戏前需要下载多少游戏内容。\n\n' +
-        '这意味着，如果您的网络连接速度很快，由于下载量较少，游戏启动速度会更快。如果您的网络连接速度较慢，由于下载量较大，游戏启动速度会更慢。但这是为了确保您无论使用何种网络连接速度，都能顺利玩游戏。\n\n ' +
-        '如果您想进一步了解该系统如何运作，请发送电子邮件至hqkj@google.com。'
-  },
-  {title: '平台可以在手机、Mac 和 Windows 上运行吗？', content: '111'},
-  {title: '平台上有哪些类型的游戏？', content: '222'},
-  {title: '我可以随心所欲地玩吗？', content: '111'},
+  {title: t("questionTitle1"), content: t("questionAnswer1")},
+  {title: t("questionTitle2"), content: t("questionAnswer2")},
+  {title: t("questionTitle3"), content: t("questionAnswer3")},
+  {title: t("questionTitle4"), content: t("questionAnswer4")},
 ]
 
 const clickQuestions = (index) => {

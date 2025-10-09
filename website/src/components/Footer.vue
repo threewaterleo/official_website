@@ -13,7 +13,7 @@
     </div>
 
     <div class="contact_btn">
-      <div>联系我们</div>
+      <div>{{ $t("contactUs") }}</div>
       <img alt="" :src="imageObj.white_arrow">
     </div>
   </div>

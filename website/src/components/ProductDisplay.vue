@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="title">
-      <div>产品展示</div>
+      <div>{{ title }}</div>
       <img alt="" :src="imageObj.title_icon">
     </div>
 
     <div class="dis_des">
-      精美新颖的UI主题，流畅丝滑的交互操作，强大稳定的服后台务，全方位打造绝佳游戏体验。
+      {{ $t("displayDes") }}
     </div>
 
     <div class="carousel">
@@ -17,7 +17,7 @@
     </div>
 
     <div class="contact_btn">
-      <div>联系我们</div>
+      <div>{{ $t("contactUs") }}</div>
       <img alt="" :src="imageObj.white_arrow">
     </div>
 
@@ -26,13 +26,16 @@
 
 <script setup>
 import Carousel from './pop/swiper.vue'
-import home_page1 from "@/assets/images/home_page1.png";
 
 const prop = defineProps({
   imageObj: {
     type: Object,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  }
 })
 
 const slideData = [

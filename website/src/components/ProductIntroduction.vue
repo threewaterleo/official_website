@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">
-      <div>产品介绍</div>
+      <div>{{ title }}</div>
       <img alt="" :src="imageObj.title_icon">
     </div>
 
@@ -10,9 +10,9 @@
     </div>
 
     <div class="">
-      <p>环球科技是综合包网业界的一面旗帜，不仅提供移动端、web端。</p>
-      <p>基础产品：包括Android、ios、web三端产品，集成了市面上最顶级的三方游戏场馆</p>
-      <p>综合后台：业界最全面、操作最便捷、体验最友好的综合后台系统，助您轻松管理您的网站。</p>
+      <p>{{ $t("productDesP1") }}</p>
+      <p>{{ $t("productDesP2") }}</p>
+      <p>{{ $t("productDesP3") }}</p>
     </div>
   </div>
 </template>
@@ -24,5 +24,9 @@ defineProps({
     type: Object,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  }
 })
 </script>

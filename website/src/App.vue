@@ -28,7 +28,7 @@
         </div>
 
         <div class="item right">
-          <div class="lang_index" @click="changeLangBox = !changeLangBox">
+          <div class="lang_index" @click="closeNav(); changeLangBox = !changeLangBox">
             <img class="lang_icon" alt="" :src="imageObj.change_lang">
             <p>{{ langList.find(item => item.abbreviation === lang )?.name }}</p>
             <img class="lang_arrow" :class="{ selected : changeLangBox }" alt="" :src="imageObj.arrow">
@@ -51,13 +51,13 @@
       <div class="main_scroll_box">
         <div class="main_top"  ref="homeRef">
           <div class="main_top_left">
-            <p>综合包网</p>
-            <p>全网条件最低</p>
+            <p>{{ $t("mainTopP1") }}</p>
+            <p>{{ $t("mainTopP2") }}</p>
             <p>
-              迄今为止全球范围内服务最全面、投入研发资金量最大、最令客户省心的包网技术服务综合供应商。
+              {{ $t("mainTopP3") }}
             </p>
             <div class="contact_btn">
-              <div>联系我们</div>
+              <div>{{ $t("contactUs") }}</div>
               <img alt="" :src="imageObj.white_arrow">
             </div>
             <div class="contact_channel">
@@ -71,24 +71,24 @@
           </div>
         </div>
 
-        <ProductIntroduction ref="productIntroRef" class="main_item des" :imageObj="imageObj" />
+        <ProductIntroduction ref="productIntroRef" class="main_item des" :imageObj="imageObj" :title="t('productIntroduction')" />
 
-        <TechnicalArchitexture ref="techArchRef" class="main_item tec" :imageObj="imageObj" />
+        <TechnicalArchitexture ref="techArchRef" class="main_item tec" :imageObj="imageObj" :title="t('technicalArchitecture')" />
 
-        <ProductDisplay ref="productDisplayRef" class="main_item dis" :imageObj="imageObj" />
+        <ProductDisplay ref="productDisplayRef" class="main_item dis" :imageObj="imageObj" :title="t('productDisplay')" />
 
-        <CooperationProcess ref="cooperationProcessRef" class="main_item pro" :imageObj="imageObj" />
+        <CooperationProcess ref="cooperationProcessRef" class="main_item pro" :imageObj="imageObj" :title="t('cooperationProcess')" />
 
-        <CooperationPlatform ref="cooperationPlatformRef" class="main_item pla" :imageObj="imageObj" :isPc="isPc" />
+        <CooperationPlatform ref="cooperationPlatformRef" class="main_item pla" :imageObj="imageObj" :isPc="isPc" :title="t('cooperationPlatform')" />
 
-        <CommonQuestions ref="commonQuestionsRef" class="main_item que" :imageObj="imageObj" />
+        <CommonQuestions ref="commonQuestionsRef" class="main_item que" :imageObj="imageObj" :title="t('commonQuestions')" />
 
         <Footer class="main_item footer" :imageObj="imageObj" />
 
       </div>
     </main>
 
-    <div class="pop nav" v-if="navBox && !isPc">
+    <div class="pop nav" v-if="navBox && !isPc" @click="navBox = false">
       <div class="pop_nav">
         <div v-for="(item, index) in navList"
              :key="index"
@@ -100,9 +100,12 @@
         </div>
       </div>
     </div>
-    <div class="pop lang" v-if="changeLangBox && !isPc">
-      <div class="pop_lang">
-
+    <div class="pop lang" v-if="changeLangBox && !isPc" @click="changeLangBox = false">
+      <div class="pop_lang" >
+        <div class="lang_item" v-for="(item, index) in langList" @click="changeLanguage(item.abbreviation)"
+             :class="{ selected: lang === item.abbreviation }">
+          {{ item.name }}
+        </div>
       </div>
     </div>
   </div>
@@ -203,10 +206,8 @@ const contactChannel = [
   {name: 'google', src: google_icon},
 ]
 
-import {useI18n} from "vue-i18n";
-import {isMobile} from "./utils/index.js"
 import {onMounted, onUnmounted, ref} from "vue";
-
+import {useI18n} from "vue-i18n";
 const {t, locale} = useI18n();
 
 const scrollContainerRef = ref(null)
@@ -223,12 +224,12 @@ const selectionNav = ref(0)
 
 const navList = [
   { label: t("frontPage"), ref: homeRef },
-  { label: '产品介绍', ref: productIntroRef },
-  { label: '技术架构', ref: techArchRef },
-  { label: '产品展示', ref: productDisplayRef },
-  { label: '合作流程', ref: cooperationProcessRef },
-  { label: '合作平台', ref: cooperationPlatformRef },
-  { label: '常见问题', ref: commonQuestionsRef }
+  { label: t("productIntroduction"), ref: productIntroRef },
+  { label: t("technicalArchitecture"), ref: techArchRef },
+  { label: t("productDisplay"), ref: productDisplayRef },
+  { label: t("cooperationProcess"), ref: cooperationProcessRef },
+  { label: t("cooperationPlatform"), ref: cooperationPlatformRef },
+  { label: t("commonQuestions"), ref: commonQuestionsRef }
 ]
 
 const langList = [

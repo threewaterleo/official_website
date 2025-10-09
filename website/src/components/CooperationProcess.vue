@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">
-      <div>合作流程</div>
+      <div>{{ title }}</div>
       <img alt="" :src="imageObj.title_icon">
     </div>
 
@@ -24,19 +24,26 @@
 </template>
 
 <script setup>
+import {useI18n} from "vue-i18n";
+const {t, locale} = useI18n();
+
 const prop = defineProps({
   imageObj: {
     type: Object,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  }
 })
 
 const items = [
-  {src: prop.imageObj.pro_icon1, content: '需求沟通'},
-  {src: prop.imageObj.pro_icon2, content: '方案制定'},
-  {src: prop.imageObj.pro_icon3, content: '建群对接'},
-  {src: prop.imageObj.pro_icon4, content: '建站素材'},
-  {src: prop.imageObj.pro_icon5, content: '系统搭建'},
-  {src: prop.imageObj.pro_icon6, content: '上线验收'},
+  {src: prop.imageObj.pro_icon1, content: t("processDes1")},
+  {src: prop.imageObj.pro_icon2, content: t("processDes2")},
+  {src: prop.imageObj.pro_icon3, content: t("processDes3")},
+  {src: prop.imageObj.pro_icon4, content: t("processDes4")},
+  {src: prop.imageObj.pro_icon5, content: t("processDes5")},
+  {src: prop.imageObj.pro_icon6, content: t("processDes6")},
 ]
 </script>
