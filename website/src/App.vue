@@ -1,6 +1,6 @@
 <template>
   <div :class="{ site_h5 : isPc, site : !isPc }">
-    <header class="header" >
+    <header class="header">
       <div class="header_content">
         <div class="item left">
           <img alt="" :src="imageObj.site_icon">
@@ -30,7 +30,7 @@
         <div class="item right">
           <div class="lang_index" @click="closeNav(); changeLangBox = !changeLangBox">
             <img class="lang_icon" alt="" :src="imageObj.change_lang">
-            <p>{{ langList.find(item => item.abbreviation === lang )?.name }}</p>
+            <p>{{ langList.find(item => item.abbreviation === lang)?.name }}</p>
             <img class="lang_arrow" :class="{ selected : changeLangBox }" alt="" :src="imageObj.arrow">
           </div>
           <div class="lang_box" v-show="isPc && changeLangBox">
@@ -49,7 +49,7 @@
 
     <main class="main disable_scrollbar" ref="scrollContainerRef">
       <div class="main_scroll_box">
-        <div class="main_top"  ref="homeRef">
+        <div class="main_top" ref="homeRef">
           <div class="main_top_left">
             <p>{{ $t("mainTopP1") }}</p>
             <p>{{ $t("mainTopP2") }}</p>
@@ -71,19 +71,25 @@
           </div>
         </div>
 
-        <ProductIntroduction ref="productIntroRef" class="main_item des" :imageObj="imageObj" :title="t('productIntroduction')" />
+        <ProductIntroduction ref="productIntroRef" class="main_item des" :imageObj="imageObj"
+                             :title="t('productIntroduction')"/>
 
-        <TechnicalArchitexture ref="techArchRef" class="main_item tec" :imageObj="imageObj" :title="t('technicalArchitecture')" />
+        <TechnicalArchitexture ref="techArchRef" class="main_item tec" :imageObj="imageObj"
+                               :title="t('technicalArchitecture')"/>
 
-        <ProductDisplay ref="productDisplayRef" class="main_item dis" :imageObj="imageObj" :title="t('productDisplay')" />
+        <ProductDisplay ref="productDisplayRef" class="main_item dis" :imageObj="imageObj"
+                        :title="t('productDisplay')"/>
 
-        <CooperationProcess ref="cooperationProcessRef" class="main_item pro" :imageObj="imageObj" :title="t('cooperationProcess')" />
+        <CooperationProcess ref="cooperationProcessRef" class="main_item pro" :imageObj="imageObj"
+                            :title="t('cooperationProcess')"/>
 
-        <CooperationPlatform ref="cooperationPlatformRef" class="main_item pla" :imageObj="imageObj" :isPc="isPc" :title="t('cooperationPlatform')" />
+        <CooperationPlatform ref="cooperationPlatformRef" class="main_item pla" :imageObj="imageObj" :isPc="isPc"
+                             :title="t('cooperationPlatform')"/>
 
-        <CommonQuestions ref="commonQuestionsRef" class="main_item que" :imageObj="imageObj" :title="t('commonQuestions')" />
+        <CommonQuestions ref="commonQuestionsRef" class="main_item que" :imageObj="imageObj"
+                         :title="t('commonQuestions')"/>
 
-        <Footer class="main_item footer" :imageObj="imageObj" />
+        <Footer class="main_item footer" :imageObj="imageObj"/>
 
       </div>
     </main>
@@ -101,7 +107,7 @@
       </div>
     </div>
     <div class="pop lang" v-if="changeLangBox && !isPc" @click="changeLangBox = false">
-      <div class="pop_lang" >
+      <div class="pop_lang">
         <div class="lang_item" v-for="(item, index) in langList" @click="changeLanguage(item.abbreviation)"
              :class="{ selected: lang === item.abbreviation }">
           {{ item.name }}
@@ -158,6 +164,8 @@ import que_open_img from '@/assets/images/que_open.png'
 import que_close_img from '@/assets/images/que_close.png'
 import nav_open from '@/assets/images/nav_open.png'
 import nav_close from '@/assets/images/nav_close.png'
+import {computed, onMounted, onUnmounted, ref} from "vue";
+import {useI18n} from "vue-i18n";
 
 const imageObj = {
   site_icon,
@@ -199,19 +207,10 @@ const imageObj = {
   nav_open,
   nav_close,
 }
-const contactChannel = [
-  {name: 'fb', src: fb_icon},
-  {name: 'ins', src: ins_icon},
-  {name: 'x', src: x_icon},
-  {name: 'google', src: google_icon},
-]
 
-import {onMounted, onUnmounted, ref} from "vue";
-import {useI18n} from "vue-i18n";
 const {t, locale} = useI18n();
 
 const scrollContainerRef = ref(null)
-
 const homeRef = ref(null)
 const productIntroRef = ref(null)
 const techArchRef = ref(null)
@@ -221,23 +220,7 @@ const cooperationPlatformRef = ref(null)
 const commonQuestionsRef = ref(null)
 
 const selectionNav = ref(0)
-
-const navList = [
-  { label: t("frontPage"), ref: homeRef },
-  { label: t("productIntroduction"), ref: productIntroRef },
-  { label: t("technicalArchitecture"), ref: techArchRef },
-  { label: t("productDisplay"), ref: productDisplayRef },
-  { label: t("cooperationProcess"), ref: cooperationProcessRef },
-  { label: t("cooperationPlatform"), ref: cooperationPlatformRef },
-  { label: t("commonQuestions"), ref: commonQuestionsRef }
-]
-
-const langList = [
-  { abbreviation: 'id', name: 'Indonesian' },
-  { abbreviation: 'en', name: 'English' },
-  { abbreviation: 'zh', name: 'Chinese' },
-]
-
+const isPc = ref(false)
 // 切换语言
 const lang = localStorage.getItem('lang') || 'en'
 const changeLangBox = ref(false)
@@ -246,7 +229,6 @@ const changeLanguage = (str) => {
   localStorage.setItem('lang', str)
   window.location.reload()
 }
-
 // 打开导航弹窗
 const navBox = ref(false)
 const openNav = () => {
@@ -256,8 +238,38 @@ const closeNav = () => {
   navBox.value = false
 }
 
+const navList = [
+  {label: t("frontPage"), ref: homeRef},
+  {label: t("productIntroduction"), ref: productIntroRef},
+  {label: t("technicalArchitecture"), ref: techArchRef},
+  {label: t("productDisplay"), ref: productDisplayRef},
+  {label: t("cooperationProcess"), ref: cooperationProcessRef},
+  {label: t("cooperationPlatform"), ref: cooperationPlatformRef},
+  {label: t("commonQuestions"), ref: commonQuestionsRef}
+]
+
+const langList = [
+  {abbreviation: 'id', name: 'Indonesian'},
+  {abbreviation: 'en', name: 'English'},
+  {abbreviation: 'zh', name: 'Chinese'},
+]
+
+const contactChannel = [
+  {name: 'fb', src: fb_icon},
+  {name: 'ins', src: ins_icon},
+  {name: 'x', src: x_icon},
+  {name: 'google', src: google_icon},
+]
+
+// 滚动至导航位置
+const container = computed(() => {
+  return scrollContainerRef.value
+})
+let scrollEndTimer
+let scrolling = false
 function scrollToSection(sectionRef, index) {
   selectionNav.value = index
+  scrolling = true
   const container = scrollContainerRef.value
   const targetEl = sectionRef.value?.$el || sectionRef.value
 
@@ -273,17 +285,50 @@ function scrollToSection(sectionRef, index) {
   }
 }
 
-onMounted(() => {
-  handleResize()
-  window.addEventListener('resize', handleResize)
-})
+function handleScroll() {
+  if (scrollEndTimer) clearTimeout(scrollEndTimer)
+  scrollEndTimer = setTimeout(() => {
+    // 滚动停止
+    scrolling = false
+  }, 150)
 
-onUnmounted(() => {
-  document.documentElement.classList.remove('site_h5');
-})
-const isPc = ref(false)
-handleResize()
+  if (scrolling) return
 
+  window.requestAnimationFrame(() => {
+    updateScrollPosition()
+  })
+}
+
+function updateScrollPosition() {
+  const scrollTop = container.value?.scrollTop
+
+  const visibleHeight = navList.map(item => {   // 返回各个元素在滚动条的高度位置
+    const el = item.ref.value?.$el || item.ref.value
+    return getVisibleHeightInContainer(el);
+  })
+
+  if (visibleHeight[0] / 2 > scrollTop ) {
+    selectionNav.value = 0
+  } else {
+    selectionNav.value = visibleHeight.indexOf(Math.max(...visibleHeight))
+  }
+}
+
+function getVisibleHeightInContainer(el) {
+  if (!el || !container.value) return 0;
+
+  const elRect = el.getBoundingClientRect();
+  const containerRect = container.value.getBoundingClientRect();
+
+  const top = Math.max(elRect.top, containerRect.top);
+  const bottom = Math.min(elRect.bottom, containerRect.bottom);
+
+  const visibleHeight = bottom - top;
+
+  return Math.max(0, visibleHeight); // 不可见时为 0
+}
+
+// 调整页面效果
 function handleResize() {
   const pc = window.innerWidth >= 550
   if (pc !== isPc.value) {
@@ -297,6 +342,23 @@ function handleResize() {
     isPc.value = pc
   }
 }
+
+onMounted(() => {
+  handleResize()
+  window.addEventListener('resize', handleResize)
+
+  if (scrollContainerRef.value) {
+    scrollContainerRef.value.addEventListener('scroll', handleScroll)
+  }
+})
+
+onUnmounted(() => {
+  document.documentElement.classList.remove('site_h5');
+
+  if (scrollContainerRef.value) {
+    scrollContainerRef.value.removeEventListener('scroll', handleScroll)
+  }
+})
 
 </script>
 
