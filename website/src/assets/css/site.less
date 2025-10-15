@@ -807,6 +807,7 @@
     left: 0;
 
     .pop_nav {
+      position: relative;
       width: 100%;
       background: #02072F;
 
@@ -856,4 +857,47 @@
       }
     }
   }
+
+  /* 从上往下插入 - nav 弹窗 */
+  .nav-pop-enter-active, .nav-pop-leave-active {
+    transition: all 0.3s ease;
+  }
+  .nav-pop-enter-from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  .nav-pop-enter-to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .nav-pop-leave-from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .nav-pop-leave-to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  /* 从下往上插入 - lang 弹窗 */
+  .lang-pop-enter-active, .lang-pop-leave-active {
+    transition: all 0.3s ease;
+  }
+  .lang-pop-enter-from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  .lang-pop-enter-to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .lang-pop-leave-from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .lang-pop-leave-to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
 }

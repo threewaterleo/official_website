@@ -94,27 +94,34 @@
       </div>
     </main>
 
-    <div class="pop nav" v-if="navBox && !isPc" @click="navBox = false">
-      <div class="pop_nav">
-        <div v-for="(item, index) in navList"
-             :key="index"
-             class="nav-item"
-             @click="scrollToSection(item.ref, index); closeNav()"
-             :class="{ selected: selectionNav === index }"
-        >
-          {{ item.label }}
+    <transition name="nav-pop">
+      <div class="pop nav" v-if="navBox && !isPc" @click="navBox = false">
+        <div class="pop_nav">
+          <div v-for="(item, index) in navList"
+               :key="index"
+               class="nav-item"
+               @click="scrollToSection(item.ref, index); closeNav()"
+               :class="{ selected: selectionNav === index }"
+          >
+            {{ item.label }}
+          </div>
         </div>
       </div>
-    </div>
-    <div class="pop lang" v-if="changeLangBox && !isPc" @click="changeLangBox = false">
-      <div class="pop_lang">
-        <div class="lang_item" v-for="(item, index) in langList" @click="changeLanguage(item.abbreviation)"
-             :class="{ selected: lang === item.abbreviation }">
-          {{ item.name }}
+    </transition>
+
+    <transition name="lang-pop">
+      <div class="pop lang" v-if="changeLangBox && !isPc" @click="changeLangBox = false"
+           :class="{ opened: navBox && !isPc }">
+        <div class="pop_lang">
+          <div class="lang_item" v-for="(item, index) in langList" @click="changeLanguage(item.abbreviation)"
+               :class="{ selected: lang === item.abbreviation }">
+            {{ item.name }}
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
+
 </template>
 
 <script setup>
@@ -235,7 +242,7 @@ const openNav = () => {
   navBox.value = true
 }
 const closeNav = () => {
-  navBox.value = false
+    navBox.value = false
 }
 
 const navList = [
@@ -267,6 +274,7 @@ const container = computed(() => {
 })
 let scrollEndTimer
 let scrolling = false
+
 function scrollToSection(sectionRef, index) {
   selectionNav.value = index
   scrolling = true
@@ -307,7 +315,7 @@ function updateScrollPosition() {
     return getVisibleHeightInContainer(el);
   })
 
-  if (visibleHeight[0] / 2 > scrollTop ) {
+  if (visibleHeight[0] / 2 > scrollTop) {
     selectionNav.value = 0
   } else {
     selectionNav.value = visibleHeight.indexOf(Math.max(...visibleHeight))
